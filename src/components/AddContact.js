@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 class AddContact extends React.Component {
   state = {
@@ -15,9 +16,9 @@ class AddContact extends React.Component {
     }
     this.props.addContactHandler(this.state);
     this.setState({ name: "", email: "", number: "" });
-    console.log(this.props)
+    console.log(this.props);
     //this.props.history.push("/");
-    //Navigate('/')
+    useNavigate("/");
   };
 
   render() {
