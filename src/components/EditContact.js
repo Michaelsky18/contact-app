@@ -2,31 +2,37 @@ import React from "react";
 import { Link } from "react-router-dom";
 //import { useNavigate } from "react-router-dom";
 
-class AddContact extends React.Component {
-  state = {
-    name: "",
-    email: "",
-    number: "",
-  };
+class EditContact extends React.Component {
+  constructor(props) {
+    super(props);
+    //need work
+    const { id, name, email, number } = props;
+    this.state = {
+      id,
+      name,
+      email,
+      number,
+    };
+  }
 
-  add = (e) => {
+  update = (e) => {
     e.preventDefault();
     if (this.state.name === "" && this.state.email === "") {
       alert("All the fields are mandatory");
       return;
     }
-    this.props.addContactHandler(this.state);
+    this.props.updateContactHandler(this.state);
     this.setState({ name: "", email: "", number: "" });
     console.log(this.props);
-    //this.props.history.push("/");
-    //useNavigate("/");
+    //need work
+    //this.props.Component.push("/")
   };
 
   render() {
     return (
       <div className="ui main">
-        <h1>Add Contact</h1>
-        <form className="ui form" onSubmit={this.add}>
+        <h1>Edit Contact</h1>
+        <form className="ui form" onSubmit={this.update}>
           <div className="field">
             <label>Name</label>
             <input
@@ -57,17 +63,20 @@ class AddContact extends React.Component {
               onChange={(e) => this.setState({ number: e.target.value })}
             />
           </div>
-          <button className="ui button green" style={{ float:"left",marginBottom:"10px" }}>Add</button>
-         
-        <Link to={"/"}>
-          <button className="ui button blue center" style={{float:"right", marginBottom:"10px" }}>Back</button>
-        </Link>
-      
+          <button className="ui button green">Update</button>
+
+          <Link to={"/"}>
+            <button
+              className="ui button blue center"
+              style={{ float: "right", marginBottom: "10px" }}
+            >
+              Back
+            </button>
+          </Link>
         </form>
-      
       </div>
     );
   }
 }
 
-export default AddContact;
+export default EditContact;
