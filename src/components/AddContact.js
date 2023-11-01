@@ -1,30 +1,30 @@
 import React, { useState } from "react";
-import { useContactsCrud } from "../context/ContactsCrudContext";
 import { useNavigate } from "react-router-dom";
+import { useContactsCrud } from "../context/ContactsCrudContext";
 
 const AddContact = () => {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+
   const { addContactHandler } = useContactsCrud();
   const navigate = useNavigate();
 
   const add = (e) => {
     e.preventDefault();
-    if (name === "" && email === "") {
-      alert("All the fields are mandatory");
+    if (name === "" || email === "") {
+      alert("ALl the fields are mandatory!");
       return;
     }
-    addContactHandler({ name, email, number });
-    setName("");
+    addContactHandler({ name, email });
     setEmail("");
-    setNumber("");
+    setName("");
+    setNumber("")
     navigate("/");
   };
-
   return (
     <div className="ui main">
-      <h1>Add Contact</h1>
+      <h2>Add Contact</h2>
       <form className="ui form" onSubmit={add}>
         <div className="field">
           <label>Name</label>
@@ -56,21 +56,7 @@ const AddContact = () => {
             onChange={(e) => setNumber(e.target.value)}
           />
         </div>
-        <button
-          className="ui button green"
-          style={{ float: "left", marginBottom: "10px" }}
-        >
-          Add
-        </button>
-
-        {/* <Link to={"/"}>
-          <button
-            className="ui button blue center"
-            style={{ float: "right", marginBottom: "10px" }}
-          >
-            Back
-          </button>
-        </Link> */}
+        <button className="ui button blue">Add</button>
       </form>
     </div>
   );
